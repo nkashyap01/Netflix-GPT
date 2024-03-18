@@ -3,8 +3,11 @@
  - created React App
  - configure tailwind css
  - Header
+ - Routing
  - Login form
  - Sign Up form
+ - Form Validation
+ - useRef
 
 
 
