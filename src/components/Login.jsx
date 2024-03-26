@@ -1,9 +1,12 @@
 import React, { useRef, useState } from 'react'
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { updateProfile } from "firebase/auth";
+import { auth } from '../utils/firebase';
  
 import Header from './Header';
 import {checkValidateData} from "../utils/validate"
-import {auth} from "../utils/firebase"
+ 
+import { useNavigate } from 'react-router-dom';
 
  
 
@@ -12,6 +15,8 @@ const Login = () => {
   const [isSignInForm, SetIsSignInForm] = useState(true);
   const email = useRef(null);
   const password = useRef(null);
+  const name = useRef(null);
+  const navigate = useNavigate();
  const [errorMessage, setErrorMessage] = useState(null);
  
 
@@ -30,7 +35,15 @@ const Login = () => {
   .then((userCredential) => {
     // Signed up 
     const user = userCredential.user;
-    console.log(user)
+    updateProfile(user, {
+      displayName: name.current.value, photoURL: "https://example.com/jane-q-user/profile.jpg"
+    }).then(() => {
+      
+      navigate("/browse");
+    }).catch((error) => {
+      setErrorMessage(error.message);
+    });
+    
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -44,6 +57,7 @@ const Login = () => {
   .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
+    navigate("/browse");
     // ...
   })
   .catch((error) => {
@@ -70,7 +84,7 @@ const Login = () => {
         <form className="bg-black p-4  absolute w-3/12 mx-auto my-36 left-0 right-0 text-white bg-opacity-80 rounded-lg" onSubmit={(e)=>e.preventDefault()}>
           <h1 className="text-3xl my-4">{isSignInForm?"Sign In":"Sign Up"}</h1>
           {!isSignInForm && (
-             <input type="text" placeholder="Full Name" className="my-2 p-3 w-full bg-[#131517]"/>
+             <input ref={name} type="text" placeholder="Full Name" className="my-2 p-3 w-full bg-[#131517]"/>
           )}
           <input ref={email} type="text" placeholder="Email Address"  className="my-2 p-3 w-full bg-[#131517]"/>
           <input ref={password} type="password" placeholder="Password" className="my-2 p-3 w-full bg-[#131517]"/>
