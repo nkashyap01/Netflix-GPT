@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,7 @@ import { addUser, removeUser } from "../utils/userSlice";
 import { useDispatch } from "react-redux";
 
 const Header = ({ showSignOutButton }) => {
+  const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSignOut = () => {
@@ -28,12 +29,31 @@ const Header = ({ showSignOutButton }) => {
     });
     return () => unsubscribe();
   }, []);
+
+  const handleSeachClick = () => {
+    navigate("/search/" + searchText);
+  };
+
   return (
     <div className=" absolute px-8 py-2 bg-gradient-to-b from-black w-full z-20 flex justify-between items-center">
       <img
         src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
         className="w-44"
       />
+      <div className="flex">
+        <input
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          type="text"
+          className=" border-2 border-black"
+        />
+        <button
+          onClick={handleSeachClick}
+          className="rounded-md p-2 text-white"
+        >
+          Search
+        </button>
+      </div>
       {showSignOutButton && (
         <div>
           <button className="bg-red-700 p-2 rounded-md" onClick={handleSignOut}>
