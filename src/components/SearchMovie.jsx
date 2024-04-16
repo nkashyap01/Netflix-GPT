@@ -14,7 +14,7 @@ const SearchMovie = () => {
       API_OPTIONS
     );
     const data = await response.json();
-    console.log(data.results);
+    
 
     setMovieInfo(data.results);
   };

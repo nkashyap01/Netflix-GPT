@@ -3,6 +3,7 @@ import Login from "./Login";
 import Browse from "./Browse";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SearchMovie from "./SearchMovie";
+import MovieDetails from "./MovieDetails";
 
 // import {   RouterProvider,   createBrowserRouter } from 'react-router-dom'
 
@@ -24,6 +25,7 @@ const Body = () => {
           <Route path="/" element={<Login />} />
           <Route path="/browse" element={<Browse />} />
           <Route path="/search/:movieName" element={<SearchMovie />} />
+          <Route path="/moviedetails/:id" element={<MovieDetails />} />
         </Routes>
       </BrowserRouter>
     </div>

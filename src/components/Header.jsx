@@ -30,7 +30,7 @@ const Header = ({ showSignOutButton }) => {
     return () => unsubscribe();
   }, []);
 
-  const handleSeachClick = () => {
+  const handleSearchClick = () => {
     navigate("/search/" + searchText);
   };
 
@@ -48,7 +48,7 @@ const Header = ({ showSignOutButton }) => {
           className=" border-2 border-black"
         />
         <button
-          onClick={handleSeachClick}
+          onClick={handleSearchClick}
           className="rounded-md p-2 text-white"
         >
           Search
