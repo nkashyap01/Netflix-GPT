@@ -36,11 +36,11 @@ const MovieDetails = () => {
   if (!movieDetails) return;
   const { title, overview, genres, release_date, poster_path } = movieDetails;
   return (
-    <div className="flex ">
-      <div>
-        <img src={IMG_CDN_URL + poster_path} alt="" />
+    <div className="flex w-screen">
+      <div className="w-4/12">
+        <img src={IMG_CDN_URL + poster_path} alt="" className="" />
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col w-8/12">
         <div>
           <h1>Title:{title}</h1>
           <p> Overview: {overview}</p>

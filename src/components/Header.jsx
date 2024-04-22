@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { addUser, removeUser } from "../utils/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { MdFavorite } from "react-icons/md";
 
 const Header = ({ showSignOutButton }) => {
   const [searchText, setSearchText] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const watchlistMovies = useSelector((state) => state.movies.watchlistMovies);
+
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {})
@@ -34,6 +37,8 @@ const Header = ({ showSignOutButton }) => {
     navigate("/search/" + searchText);
   };
 
+  console.log(watchlistMovies);
+
   return (
     <div className=" absolute px-8 py-2 bg-gradient-to-b from-black w-full z-20 flex justify-between items-center">
       <img
@@ -54,6 +59,13 @@ const Header = ({ showSignOutButton }) => {
           Search
         </button>
       </div>
+      <Link to="/watchlist">
+        <div className="flex justify-center items-center bg-red-700  rounded-md p-2 gap-2">
+          <button className="  text-white"> My Watchlist</button>
+          <MdFavorite className="text-2xl" />
+          <span> {watchlistMovies.length}</span>
+        </div>
+      </Link>
       {showSignOutButton && (
         <div>
           <button className="bg-red-700 p-2 rounded-md" onClick={handleSignOut}>
