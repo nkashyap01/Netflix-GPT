@@ -9,17 +9,17 @@ import { auth } from "../utils/firebase";
 import Header from "./Header";
 import { checkValidateData } from "../utils/validate";
 
- 
 import { addUser } from "../utils/userSlice";
 import { useDispatch } from "react-redux";
 import { LOGO } from "../utils/constants";
+import FAQ from "./FAQ";
 
 const Login = () => {
   const [isSignInForm, SetIsSignInForm] = useState(true);
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
-  
+
   const [errorMessage, setErrorMessage] = useState(null);
   const dispatch = useDispatch();
 
@@ -52,7 +52,6 @@ const Login = () => {
               dispatch(
                 addUser({ uid: uid, email: email, displayName: displayName })
               );
-              
             })
             .catch((error) => {
               setErrorMessage(error.message);
@@ -72,7 +71,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-           
+
           // ...
         })
         .catch((error) => {
@@ -132,6 +131,11 @@ const Login = () => {
             : "Already registered? Sign in now"}
         </p>
       </form>
+
+      <div className="absolute left-[350px] top-[800px] justify-center w-[50%] ">
+        {" "}
+        <FAQ />
+      </div>
     </div>
   );
 };

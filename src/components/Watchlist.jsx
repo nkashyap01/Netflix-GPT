@@ -8,9 +8,9 @@ const Watchlist = () => {
   return (
     <div className="flex flex-wrap gap-5">
       {watchlistMovies &&
-        watchlistMovies.map(({ posterPath, title, release_date,movieId }) => {
+        watchlistMovies.map(({ posterPath, title, release_date, movieId }) => {
           return (
-            <Link to={"/movieDetails/"+movieId}>
+            <Link to={`/movieDetails/${movieId}`}>
               <MovieCard
                 posterPath={posterPath}
                 title={title}

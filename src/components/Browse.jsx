@@ -6,7 +6,7 @@ import SecondaryContainer from "./SecondaryContainer";
 import usePopularMovies from "../hooks/userPopularMovies";
 import useTopRatedMovies from "../hooks/useTopRatedMovies";
 import useUpcomingMovies from "../hooks/upcomingMovies";
-
+ 
 const Browse = () => {
   useNowPlayingMovies();
   usePopularMovies();
@@ -18,6 +18,7 @@ const Browse = () => {
       <Header showSignOutButton={true} />
       <MainContainer />
       <SecondaryContainer />
+      
     </div>
   );
 };

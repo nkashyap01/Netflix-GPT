@@ -19,7 +19,7 @@ const Body = () => {
   // }]);
 
   return (
-    <div>
+    <div className="">
       {/* <RouterProvider  router={appRouter} />  */}
       <BrowserRouter>
         <Routes>
@@ -27,7 +27,7 @@ const Body = () => {
           <Route path="/browse" element={<Browse />} />
           <Route path="/search/:movieName" element={<SearchMovie />} />
           <Route path="/moviedetails/:id" element={<MovieDetails />} />
-          <Route path="/watchlist" element={< Watchlist/>} />
+          <Route path="/watchlist" element={<Watchlist />} />
         </Routes>
       </BrowserRouter>
     </div>
