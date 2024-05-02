@@ -5,6 +5,7 @@ import {
 } from "firebase/auth";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { setIsLogin } from "../utils/moviesSlice";
 
 import Header from "./Header";
 import { checkValidateData } from "../utils/validate";
@@ -13,6 +14,7 @@ import { addUser } from "../utils/userSlice";
 import { useDispatch } from "react-redux";
 import { LOGO } from "../utils/constants";
 import FAQ from "./FAQ";
+import ChatGpt from "./ChatGpt";
 
 const Login = () => {
   const [isSignInForm, SetIsSignInForm] = useState(true);
@@ -21,6 +23,7 @@ const Login = () => {
   const name = useRef(null);
 
   const [errorMessage, setErrorMessage] = useState(null);
+
   const dispatch = useDispatch();
 
   const toggleSignInForm = () => {
@@ -72,6 +75,7 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
 
+          dispatch(setIsLogin(true));
           // ...
         })
         .catch((error) => {
@@ -135,6 +139,7 @@ const Login = () => {
       <div className="absolute left-[350px] top-[800px] justify-center w-[50%] ">
         {" "}
         <FAQ />
+        <ChatGpt />
       </div>
     </div>
   );

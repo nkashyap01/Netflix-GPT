@@ -9,6 +9,7 @@ const moviesSlice = createSlice({
     topRatedMovies: null,
     upcomingMovies: null,
     watchlistMovies: [],
+    isLogin: false,
   },
   reducers: {
     addNowPlayingMovies: (state, action) => {
@@ -35,6 +36,9 @@ const moviesSlice = createSlice({
         (movie) => movie.title !== title
       );
     },
+    setIsLogin: (state, action) => {
+      state.isLogin = action.payload;
+    },
   },
 });
 
@@ -46,5 +50,7 @@ export const {
   addUpcomingMovies,
   addWatchlistMovies,
   deleteWatchlistMovies,
+  setIsLogin,
 } = moviesSlice.actions;
+
 export default moviesSlice.reducer;

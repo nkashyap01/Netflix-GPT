@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { addUser, removeUser } from "../utils/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { MdFavorite } from "react-icons/md";
+import { setIsLogin } from "../utils/moviesSlice";
 
 const Header = ({ showSignOutButton }) => {
   const [searchText, setSearchText] = useState("");
@@ -12,9 +13,14 @@ const Header = ({ showSignOutButton }) => {
   const dispatch = useDispatch();
   const watchlistMovies = useSelector((state) => state.movies.watchlistMovies);
 
+  const { isLogin } = useSelector((store) => store.movies);
+
+
   const handleSignOut = () => {
     signOut(auth)
-      .then(() => {})
+      .then(() => {
+       dispatch(setIsLogin(false));
+      })
       .catch((error) => {
         navigate("/error");
       });
@@ -45,7 +51,20 @@ const Header = ({ showSignOutButton }) => {
         src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
         className="w-44"
       />
-      <div className="flex">
+      {isLogin ? (
+        <div className="text-white">
+          <p>search</p>
+          <p>wishlist</p>
+          <p>sign out</p>
+        </div>
+      ) : (
+        <div className="text-white">
+          <p>sign in</p>
+          <p>sign up</p>
+        </div>
+      )}
+
+      {/* <div className="flex">
         <input
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
@@ -58,14 +77,15 @@ const Header = ({ showSignOutButton }) => {
         >
           Search
         </button>
-      </div>
-      <Link to="/watchlist">
+      </div> */}
+      {/* <Link to="/watchlist">
         <div className="flex justify-center items-center bg-red-700  rounded-md p-2 gap-2">
           <button className="  text-white"> My Watchlist</button>
           <MdFavorite className="text-2xl" />
           <span> {watchlistMovies.length}</span>
         </div>
-      </Link>
+      </Link> */}
+
       {showSignOutButton && (
         <div>
           <button className="bg-red-700 p-2 rounded-md" onClick={handleSignOut}>
